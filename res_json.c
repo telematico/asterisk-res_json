@@ -452,9 +452,10 @@ static int jsonvariables_exec(struct ast_channel *chan, const char *data) {
 		return 0;
 	}
 	// parse json
-	cJSON *doc = cJSON_Parse(pbx_builtin_getvar_helper(chan, args.json));
+	//cJSON *doc = cJSON_Parse(pbx_builtin_getvar_helper(chan, args.json));
+	cJSON *doc = cJSON_Parse(args.json);
 	if (!doc) {
-		ast_log(LOG_WARNING, "source json parsing error\n");
+		ast_log(LOG_WARNING, "source json parsing error %s\n",args.json);
 		json_set_operation_result(chan, ASTJSON_PARSE_ERROR);
 		return 0;
 	}
